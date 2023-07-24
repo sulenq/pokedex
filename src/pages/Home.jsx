@@ -1,4 +1,12 @@
-import { Box, HStack, Text, Input, IconButton, Icon } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  Text,
+  Input,
+  IconButton,
+  Icon,
+  VStack,
+} from '@chakra-ui/react';
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
@@ -7,7 +15,7 @@ import ItemList from '../components/ItemList';
 
 export default function Home() {
   return (
-    <Box py={4} px={6}>
+    <VStack pt={4} px={6} h={'100vh'} gap={0}>
       <Box lineHeight={1.7} mb={4}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={800} fontSize={32}>
@@ -25,7 +33,7 @@ export default function Home() {
         </Text>
       </Box>
 
-      <HStack mb={4} className="sticky">
+      <HStack mb={2} className="sticky" w={'100%'}>
         <Input
           className="input"
           variant={'filled'}
@@ -43,6 +51,6 @@ export default function Home() {
       </HStack>
 
       <ItemList />
-    </Box>
+    </VStack>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, SimpleGrid } from '@chakra-ui/react';
+import { Button, SimpleGrid, VStack } from '@chakra-ui/react';
 import Item from './Item';
 
 export default function ItemList() {
@@ -43,7 +43,7 @@ export default function ItemList() {
   }
 
   return (
-    <>
+    <VStack h={'calc(100% + 102px)'} pt={2} pb={4} overflow={'auto'}>
       <SimpleGrid columns={[2, null, 3, 4]} gap={4}>
         {pokemonList?.map((p, i) => {
           return <Item key={i} data={p} />;
@@ -52,6 +52,7 @@ export default function ItemList() {
 
       <Button
         onClick={handleLoadMore}
+        flexShrink={0}
         w={'100%'}
         variant={'outline'}
         colorScheme="p"
@@ -59,6 +60,6 @@ export default function ItemList() {
       >
         Load More
       </Button>
-    </>
+    </VStack>
   );
 }
