@@ -1,0 +1,46 @@
+#root {
+  max-width: 720px !important;
+  margin: 0 auto;
+}
+
+:root {
+  --p-50: #ffdbdb;
+  --p-100: #fcaaa9;
+  --p-200: #fe9392;
+  --p-300: #f77975;
+  --p-400: #e74e40;
+  --p-500: #cc0000;
+  --p-600: #cc0000;
+  --p-700: #920019;
+  --p-800: #76001e;
+  --p-900: #610021;
+  --divider: #96adc13d;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input:focus {
+  border: 2px solid var(--p-500) !important;
+  box-shadow: none !important;
+}
+
+button {
+  font-size: 14px;
+}
+.p-btn {
+  background: var(--p-500) !important;
+  color: white !important;
+}
+.p-btn:hover {
+  background: var(--p-600) !important;
+}
+.p-btn:active {
+  background: var(--p-700) !important;
+}
+
+a {
+  text-decoration: none !important;
+}
