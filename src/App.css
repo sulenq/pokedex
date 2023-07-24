@@ -15,6 +15,7 @@
   --p-800: #76001e;
   --p-900: #610021;
   --divider: #96adc13d;
+  --divider2: #5f6c790e;
 }
 
 * {
@@ -30,17 +31,25 @@ input:focus {
 button {
   font-size: 14px;
 }
-.p-btn {
-  background: var(--p-500) !important;
-  color: white !important;
-}
-.p-btn:hover {
-  background: var(--p-600) !important;
-}
-.p-btn:active {
-  background: var(--p-700) !important;
-}
 
 a {
   text-decoration: none !important;
+}
+
+#search {
+  position: sticky;
+  top: 0;
+}
+
+.spritesDetailItem {
+  width: 90%;
+  margin: auto auto;
+  padding: 16px;
+  scroll-snap-align: center;
+}
+
+.detailItem {
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--divider2);
 }

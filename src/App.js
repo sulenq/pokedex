@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { myTheme } from './myTheme';
 import './App.css';
 import Home from './pages/Home';
+import PokemonDetails from './pages/PokemonDetails';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:pokemonid" element />
+          <Route path="/:pokemonid" element={<PokemonDetails />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

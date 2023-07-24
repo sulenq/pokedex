@@ -24,14 +24,20 @@ export default function Item(props) {
     <Link href={`${detailsData?.id}`}>
       <VStack
         gap={0}
-        borderRadius={10}
+        borderRadius={12}
         border={'1px solid var(--divider)'}
         h={200}
         p={4}
       >
-        <Image src={detailsData?.sprites.front_default} h={'100%'} />
-        <Text fontWeight={700} noOfLines={1} mb={1}>{name}</Text>
-        <Text fontSize={14}>{detailsData?.id.toString().padStart(3, '0')}</Text>
+        <Image
+          src={detailsData?.sprites?.other?.['official-artwork']?.front_default}
+          h={'100%'}
+          loading="lazy"
+        />
+        <Text fontWeight={700} noOfLines={1} mb={1}>
+          {name}
+        </Text>
+        <Text fontSize={14}>{detailsData?.id.toString().padStart(4, '0')}</Text>
       </VStack>
     </Link>
   );

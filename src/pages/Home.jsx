@@ -16,7 +16,7 @@ import ItemList from '../components/ItemList';
 export default function Home() {
   return (
     <VStack pt={4} px={6} h={'100vh'} gap={0}>
-      <Box lineHeight={1.7} mb={4}>
+      <Box lineHeight={1.7} mb={4} w={'100%'}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={800} fontSize={32}>
             Pokédex
@@ -37,16 +37,17 @@ export default function Home() {
         <Input
           className="input"
           variant={'filled'}
-          borderRadius={10}
+          borderRadius={12}
           placeholder="Search by Name or Number"
           _placeholder={{ fontSize: 14 }}
         />
 
         <IconButton
-          className="p-btn"
+          // className="p-btn"
+          colorScheme="p"
           aria-label="searchPokemonBtn"
           icon={<Icon as={SearchOutlinedIcon} />}
-          borderRadius={10}
+          borderRadius={12}
         />
       </HStack>
 

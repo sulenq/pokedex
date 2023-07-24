@@ -43,7 +43,7 @@ export default function ItemList() {
   }
 
   return (
-    <VStack h={'calc(100% + 102px)'} pt={2} pb={4} overflow={'auto'}>
+    <VStack pt={2} pb={4}>
       <SimpleGrid columns={[2, null, 3, 4]} gap={4}>
         {pokemonList?.map((p, i) => {
           return <Item key={i} data={p} />;
