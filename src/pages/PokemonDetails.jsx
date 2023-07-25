@@ -29,7 +29,7 @@ export default function PokemonDetails() {
   const pokemonId = window.location.pathname;
   const [pokemonDetails, setPokemonDetails] = useState();
   const [species, setSpecies] = useState();
-  const detailTab = ['Details', 'Shiny', 'Stats', 'Evolution'];
+  const detailTab = ['Details', 'Shiny', 'Stats', 'Evolution', 'Form'];
   const statsName = name => {
     switch (name) {
       case 'hp':
@@ -165,24 +165,34 @@ export default function PokemonDetails() {
       </HStack> */}
 
       <Tabs colorScheme="p">
-        <TabList px={6} gap={2} borderBottom={'none'} justifyContent={'center'}>
-          {detailTab?.map((d, i) => {
-            return (
-              <Tab
-                key={i}
-                fontWeight={700}
-                px={2}
-                _active={{ bg: 'none' }}
-                fontSize={18}
-                // borderBottom={'none'}
-              >
-                {d}
-              </Tab>
-            );
-          })}
+        <TabList
+          className={window.innerWidth < 1000 && 'hidden-scroll'}
+          px={6}
+          py={2}
+          gap={2}
+          borderBottom={'none'}
+          // justifyContent={'center'}
+          overflow={'auto'}
+        >
+          <HStack w={'max-content'}>
+            {detailTab?.map((d, i) => {
+              return (
+                <Tab
+                  key={i}
+                  fontWeight={700}
+                  px={2}
+                  _active={{ bg: 'none' }}
+                  fontSize={18}
+                  // borderBottom={'none'}
+                >
+                  {d}
+                </Tab>
+              );
+            })}
+          </HStack>
         </TabList>
 
-        <TabPanels fontSize={14}>
+        <TabPanels fontSize={14} mt={'-12px'}>
           <TabPanel px={8}>
             <HStack className="detailItem">
               <Text w={'120px'}>Type</Text>
@@ -233,14 +243,19 @@ export default function PokemonDetails() {
           </TabPanel>
 
           <TabPanel px={0}>
-            <Box w={'100%'} overflow={'auto'} scrollSnapType={'x mandatory'}>
-              <Image
-                className="spritesDetailItem"
-                src={
-                  pokemonDetails?.sprites?.other?.['official-artwork']
-                    ?.front_shiny
-                }
-              />
+            <Box w={'100%'}>
+              {pokemonDetails?.sprites?.other?.['official-artwork']
+                ?.front_shiny ? (
+                <Image
+                  className="spritesDetailItem"
+                  src={
+                    pokemonDetails?.sprites?.other?.['official-artwork']
+                      ?.front_shiny
+                  }
+                />
+              ) : (
+                <Text textAlign={'center'}>None</Text>
+              )}
             </Box>
           </TabPanel>
 
@@ -258,6 +273,14 @@ export default function PokemonDetails() {
                 </HStack>
               );
             })}
+          </TabPanel>
+
+          <TabPanel px={0}>
+            <Text textAlign={'center'}>Soon!</Text>
+          </TabPanel>
+
+          <TabPanel px={0}>
+            <Text textAlign={'center'}>Soon!</Text>
           </TabPanel>
         </TabPanels>
       </Tabs>
