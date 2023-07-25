@@ -27,7 +27,7 @@ export default function Item(props) {
         borderRadius={12}
         justifyContent={'space-between'}
         border={'1px solid var(--divider)'}
-        h={240}
+        // h={240}
         p={4}
       >
         <Image
@@ -35,7 +35,7 @@ export default function Item(props) {
           w={'100%'}
           loading="lazy"
         />
-        <Text fontWeight={700} noOfLines={1} mb={'-16px'}>
+        <Text fontWeight={700} noOfLines={1}>
           {name}
         </Text>
         <Text fontSize={14}>{detailsData?.id.toString().padStart(4, '0')}</Text>

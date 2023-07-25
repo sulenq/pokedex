@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { Button, SimpleGrid, VStack } from '@chakra-ui/react';
 import Item from './Item';
 
-export default function ItemList() {
-  const [pokemonList, setPokemonList] = useState([]);
-  const [nextPokemonList, setNextPokemonList] = useState();
-  const offset = 0;
-  const limit = 20;
-
+export default function ItemList({
+  pokemonList,
+  setPokemonList,
+  nextPokemonList,
+  setNextPokemonList,
+  isSearchEmpty,
+}) {
   useEffect(() => {
-    const api = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+    const api = `https://pokeapi.co/api/v2/pokemon?offset=20&limit=20`;
 
     axios
       .get(api)
@@ -28,7 +29,7 @@ export default function ItemList() {
         setNextPokemonList(r.data.next);
       })
       .catch(e => console.log(e));
-  }, []);
+  }, [setPokemonList, setNextPokemonList]);
 
   function handleLoadMore() {
     console.log(pokemonList);
@@ -44,22 +45,24 @@ export default function ItemList() {
 
   return (
     <VStack pt={2} pb={4}>
-      <SimpleGrid columns={[2, null, 3, 4]} gap={4}>
+      <SimpleGrid columns={[2, 3, 3, 4]} gap={4}>
         {pokemonList?.map((p, i) => {
           return <Item key={i} data={p} />;
         })}
       </SimpleGrid>
 
-      <Button
-        onClick={handleLoadMore}
-        flexShrink={0}
-        w={'100%'}
-        variant={'outline'}
-        colorScheme="p"
-        mt={4}
-      >
-        Load More
-      </Button>
+      {isSearchEmpty && (
+        <Button
+          onClick={handleLoadMore}
+          flexShrink={0}
+          w={'100%'}
+          variant={'outline'}
+          colorScheme="p"
+          mt={4}
+        >
+          Load More
+        </Button>
+      )}
     </VStack>
   );
 }
