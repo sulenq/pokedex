@@ -98,6 +98,7 @@ export default function Home() {
                 getPokemon();
               }}
               colorScheme="gray"
+              variant={'ghost'}
               aria-label="searchPokemonBtn"
               icon={<Icon as={ClearIcon} fontSize={'20'} />}
               borderRadius={12}
