@@ -42,7 +42,7 @@ a {
 }
 
 .spritesDetailItem {
-  width: 90%;
+  width: 75%;
   margin: auto auto;
   padding: 16px;
   scroll-snap-align: center;

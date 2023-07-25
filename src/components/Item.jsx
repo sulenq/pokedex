@@ -25,16 +25,17 @@ export default function Item(props) {
       <VStack
         gap={0}
         borderRadius={12}
+        justifyContent={'space-between'}
         border={'1px solid var(--divider)'}
-        h={200}
+        h={240}
         p={4}
       >
         <Image
           src={detailsData?.sprites?.other?.['official-artwork']?.front_default}
-          h={'100%'}
+          w={'100%'}
           loading="lazy"
         />
-        <Text fontWeight={700} noOfLines={1} mb={1}>
+        <Text fontWeight={700} noOfLines={1} mb={'-16px'}>
           {name}
         </Text>
         <Text fontSize={14}>{detailsData?.id.toString().padStart(4, '0')}</Text>

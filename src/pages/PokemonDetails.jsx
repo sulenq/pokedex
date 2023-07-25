@@ -15,7 +15,7 @@ import {
   TabPanels,
   Tabs,
   Text,
-  useColorMode,
+  // useColorMode,
 } from '@chakra-ui/react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -25,7 +25,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function PokemonDetails() {
   const navigate = useNavigate();
-  const { colorMode } = useColorMode();
+  // const { colorMode } = useColorMode();
   const pokemonId = window.location.pathname;
   const [pokemonDetails, setPokemonDetails] = useState();
   const [species, setSpecies] = useState();
@@ -53,11 +53,30 @@ export default function PokemonDetails() {
       default:
         return type;
       case 'grass':
+      case 'bug':
         return 'green';
       case 'poison':
+      case 'ghost':
+      case 'dragon':
         return 'purple';
       case 'fire':
         return 'red';
+      case 'flying':
+      case 'ice':
+        return 'cyan';
+      case 'water':
+        return 'blue';
+      case 'ground':
+      case 'fighting':
+      case 'rock':
+        return 'orange';
+      case 'fairy':
+      case 'psychic':
+        return 'pink';
+      case 'electric':
+        return 'yellow';
+      case 'steel':
+        return 'gray';
     }
   };
 
@@ -79,7 +98,7 @@ export default function PokemonDetails() {
     axios
       .get(api)
       .then(r => {
-        console.log(r.data);
+        // console.log(r.data);
         setSpecies(r.data);
       })
       .catch(e => console.log(e));
@@ -109,23 +128,16 @@ export default function PokemonDetails() {
         </Box>
       </HStack>
 
-      <HStack p={4} h={'300px'}>
-        <IconButton
-          h={'100%'}
-          // colorScheme="p"
-          variant={'outline'}
-          borderRadius={20}
-          icon={<Icon as={ArrowLeftIcon} />}
-        />
-
+      <HStack p={4} pt={0} justifyContent={'center'}>
         <Box
           border={'1px solid var(--divider)'}
-          bg={colorMode === 'light' ? 'gray.100' : 'whiteAlpha.200'}
+          // bg={colorMode === 'light' ? 'gray.100' : 'whiteAlpha.200'}
           borderRadius={20}
           p={4}
           h={'100%'}
         >
           <Image
+            loading="lazy"
             src={
               pokemonDetails?.sprites?.other?.['official-artwork']
                 ?.front_default
@@ -133,7 +145,16 @@ export default function PokemonDetails() {
             w={'100%'}
           />
         </Box>
+      </HStack>
 
+      <HStack px={4} w={'100%'} justifyContent={'center'} mb={4}>
+        <IconButton
+          h={'100%'}
+          // colorScheme="p"
+          variant={'outline'}
+          borderRadius={20}
+          icon={<Icon as={ArrowLeftIcon} />}
+        />
         <IconButton
           h={'100%'}
           // colorScheme="p"
@@ -203,13 +224,6 @@ export default function PokemonDetails() {
             </HStack>
 
             <HStack className="detailItem">
-              <Text w={'120px'}>Base Exp</Text>
-              <Text>
-                {pokemonDetails?.base_experience + ' Exp' || 'Loading...'}
-              </Text>
-            </HStack>
-
-            <HStack className="detailItem">
               <Text w={'120px'}>Base Happiness</Text>
               <HStack gap={1}>
                 <Text>{species?.base_happiness || 'Loading...'}</Text>
@@ -231,9 +245,6 @@ export default function PokemonDetails() {
           </TabPanel>
 
           <TabPanel px={8}>
-            <Text fontWeight={600} mb={2}>
-              Base Stat
-            </Text>
             {pokemonDetails?.stats?.map((s, i) => {
               return (
                 <HStack
