@@ -19,8 +19,8 @@ import {
 } from '@chakra-ui/react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+// import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+// import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function PokemonDetails() {
@@ -147,7 +147,7 @@ export default function PokemonDetails() {
         </Box>
       </HStack>
 
-      <HStack px={4} w={'100%'} justifyContent={'center'} mb={4}>
+      {/* <HStack px={4} w={'100%'} justifyContent={'center'} mb={4}>
         <IconButton
           h={'100%'}
           // colorScheme="p"
@@ -162,7 +162,7 @@ export default function PokemonDetails() {
           borderRadius={20}
           icon={<Icon as={ArrowRightIcon} />}
         />
-      </HStack>
+      </HStack> */}
 
       <Tabs colorScheme="p">
         <TabList px={6} gap={2} borderBottom={'none'} justifyContent={'center'}>
@@ -201,7 +201,7 @@ export default function PokemonDetails() {
               <Text w={'120px'}>Shape</Text>
               <Text>
                 {species?.shape?.name[0].toUpperCase() +
-                  species?.shape?.name?.slice(1) || 'Loading...'}
+                  species?.shape?.name?.slice(1) || 'Undefined'}
               </Text>
             </HStack>
 
@@ -209,24 +209,24 @@ export default function PokemonDetails() {
               <Text w={'120px'}>Color</Text>
               <Text>
                 {species?.color?.name[0].toUpperCase() +
-                  species?.color?.name?.slice(1) || 'Loading...'}
+                  species?.color?.name?.slice(1) || 'Undefined'}
               </Text>
             </HStack>
 
             <HStack className="detailItem">
               <Text w={'120px'}>Height</Text>
-              <Text>{pokemonDetails?.height / 10 + ' m' || 'Loading...'}</Text>
+              <Text>{pokemonDetails?.height / 10 + ' m' || 'Undefined'}</Text>
             </HStack>
 
             <HStack className="detailItem">
               <Text w={'120px'}>Weight</Text>
-              <Text>{pokemonDetails?.weight / 10 + ' kg' || 'Loading...'}</Text>
+              <Text>{pokemonDetails?.weight / 10 + ' kg' || 'Undefined'}</Text>
             </HStack>
 
             <HStack className="detailItem">
               <Text w={'120px'}>Base Happiness</Text>
               <HStack gap={1}>
-                <Text>{species?.base_happiness || 'Loading...'}</Text>
+                <Text>{species?.base_happiness || 'Undefined'}</Text>
                 <Icon w={4} as={FavoriteIcon} />
               </HStack>
             </HStack>
