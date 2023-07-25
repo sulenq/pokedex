@@ -11,7 +11,7 @@ export default function ItemList({
   isSearchEmpty,
 }) {
   useEffect(() => {
-    const api = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=20`;
+    const api = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=50`;
 
     axios
       .get(api)

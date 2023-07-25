@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { VStack, Image, Text, Link } from '@chakra-ui/react';
+import { VStack, Image, Text, Link, Spinner } from '@chakra-ui/react';
 
 export default function Item(props) {
   const data = props?.data;
@@ -10,6 +10,7 @@ export default function Item(props) {
 
   useEffect(() => {
     const api = data.url;
+    setDetailsData();
 
     axios
       .get(api)
@@ -21,20 +22,24 @@ export default function Item(props) {
   }, [data.url]);
 
   return (
-    <Link href={`${detailsData?.id}`}>
-      <VStack
-        gap={0}
-        borderRadius={12}
-        justifyContent={'space-between'}
-        border={'1px solid var(--divider)'}
-        // h={240}
-        p={4}
-      >
-        <Image
-          src={detailsData?.sprites?.other?.['official-artwork']?.front_default}
-          w={'100%'}
-          loading="lazy"
-        />
+    <Link
+      href={`${detailsData?.id}`}
+      borderRadius={12}
+      border={'1px solid var(--divider)'}
+    >
+      <VStack gap={0} justifyContent={'space-between'} p={4}>
+        {detailsData ? (
+          <Image
+            src={
+              detailsData?.sprites?.other?.['official-artwork']?.front_default
+            }
+            w={'100%'}
+          />
+        ) : (
+          <VStack h={'100%'}>
+            <Spinner />
+          </VStack>
+        )}
         <Text fontWeight={700} noOfLines={1}>
           {name}
         </Text>

@@ -51,8 +51,8 @@ export default function Home() {
   }
 
   return (
-    <VStack pt={4} px={6} h={'100vh'} gap={0}>
-      <Box lineHeight={1.7} mb={4} w={'100%'}>
+    <VStack pt={4} px={6} gap={0}>
+      <Box lineHeight={1.7} mb={1} w={'100%'}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={800} fontSize={32}>
             Pokédex
@@ -70,14 +70,15 @@ export default function Home() {
         </Text>
       </Box>
 
-      <HStack mb={2} className="sticky" w={'100%'}>
+      <HStack id="search" py={2} w={'100%'}>
         <Box position={'relative'} w={'100%'}>
           <Input
             className={colorMode === 'light' ? 'input' : 'input-dark'}
-            variant={'filled'}
+            // variant={'filled'}
             pr={14}
             borderRadius={12}
-            placeholder="Search by Name or Number"
+            bg={colorMode === 'light' ? 'white' : '#18191b'}
+            placeholder="Search by Name"
             _placeholder={{ fontSize: 14 }}
             onChange={e => {
               setSearch(e.target.value);
@@ -103,6 +104,7 @@ export default function Home() {
               icon={<Icon as={ClearIcon} fontSize={'20'} />}
               borderRadius={12}
               size={'sm'}
+              zIndex={99}
             />
           </Box>
         </Box>

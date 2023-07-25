@@ -29,7 +29,14 @@ export default function PokemonDetails() {
   const pokemonId = window.location.pathname;
   const [pokemonDetails, setPokemonDetails] = useState();
   const [species, setSpecies] = useState();
-  const detailTab = ['Details', 'Shiny', 'Stats', 'Evolution', 'Form'];
+  const detailTab = [
+    'Details',
+    'Stats',
+    'Shiny',
+    'Evolution',
+    'Form',
+    'Nature',
+  ];
   const statsName = name => {
     switch (name) {
       case 'hp':
@@ -77,6 +84,8 @@ export default function PokemonDetails() {
         return 'yellow';
       case 'steel':
         return 'gray';
+      case 'dark':
+        return 'black';
     }
   };
 
@@ -128,9 +137,10 @@ export default function PokemonDetails() {
         </Box>
       </HStack>
 
-      <HStack p={4} pt={0} justifyContent={'center'}>
+      <HStack w={'100%'} p={6} pt={0} pb={4} justifyContent={'center'}>
         <Box
           border={'1px solid var(--divider)'}
+          w={'100%'}
           // bg={colorMode === 'light' ? 'gray.100' : 'whiteAlpha.200'}
           borderRadius={20}
           p={4}
@@ -168,19 +178,17 @@ export default function PokemonDetails() {
         <TabList
           className={window.innerWidth < 1000 && 'hidden-scroll'}
           px={6}
-          py={2}
-          gap={2}
+          pb={2}
           borderBottom={'none'}
-          // justifyContent={'center'}
           overflow={'auto'}
         >
-          <HStack w={'max-content'}>
+          <HStack w={'max-content'} gap={4}>
             {detailTab?.map((d, i) => {
               return (
                 <Tab
                   key={i}
                   fontWeight={700}
-                  px={2}
+                  px={0}
                   _active={{ bg: 'none' }}
                   fontSize={18}
                   // borderBottom={'none'}
@@ -193,7 +201,7 @@ export default function PokemonDetails() {
         </TabList>
 
         <TabPanels fontSize={14} mt={'-12px'}>
-          <TabPanel px={8}>
+          <TabPanel px={6}>
             <HStack className="detailItem">
               <Text w={'120px'}>Type</Text>
               <HStack>
@@ -242,24 +250,7 @@ export default function PokemonDetails() {
             </HStack>
           </TabPanel>
 
-          <TabPanel px={0}>
-            <Box w={'100%'}>
-              {pokemonDetails?.sprites?.other?.['official-artwork']
-                ?.front_shiny ? (
-                <Image
-                  className="spritesDetailItem"
-                  src={
-                    pokemonDetails?.sprites?.other?.['official-artwork']
-                      ?.front_shiny
-                  }
-                />
-              ) : (
-                <Text textAlign={'center'}>None</Text>
-              )}
-            </Box>
-          </TabPanel>
-
-          <TabPanel px={8}>
+          <TabPanel px={6}>
             {pokemonDetails?.stats?.map((s, i) => {
               return (
                 <HStack
@@ -276,11 +267,36 @@ export default function PokemonDetails() {
           </TabPanel>
 
           <TabPanel px={0}>
-            <Text textAlign={'center'}>Soon!</Text>
+            <HStack p={6} pt={0} pb={4} w={'100%'} justifyContent={'center'}>
+              <Box
+                // border={'1px solid var(--divider)'}
+                w={'100%'}
+                borderRadius={20}
+                p={4}
+                h={'100%'}
+              >
+                <Image
+                  loading="lazy"
+                  src={
+                    pokemonDetails?.sprites?.other?.['official-artwork']
+                      ?.front_shiny
+                  }
+                  w={'100%'}
+                />
+              </Box>
+            </HStack>
           </TabPanel>
 
           <TabPanel px={0}>
-            <Text textAlign={'center'}>Soon!</Text>
+            <Text textAlign={'center'}>Unavailable</Text>
+          </TabPanel>
+
+          <TabPanel px={0}>
+            <Text textAlign={'center'}>Unavailable</Text>
+          </TabPanel>
+
+          <TabPanel px={0}>
+            <Text textAlign={'center'}>Unavailable</Text>
           </TabPanel>
         </TabPanels>
       </Tabs>
