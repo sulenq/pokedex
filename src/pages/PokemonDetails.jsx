@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 import {
   Badge,
   Box,
   HStack,
-  Icon,
-  IconButton,
   Image,
   Tab,
   TabList,
@@ -18,15 +15,12 @@ import {
   // useColorMode,
 } from '@chakra-ui/react';
 
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
 // import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 // import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 
-export default function PokemonDetails() {
-  const navigate = useNavigate();
-  // const { colorMode } = useColorMode();
-  const pokemonId = window.location.pathname;
+export default function PokemonDetails(props) {
+  const pokemonId = props?.id;
   const [pokemonDetails, setPokemonDetails] = useState();
   const [species, setSpecies] = useState();
   const detailTab = [
@@ -89,8 +83,10 @@ export default function PokemonDetails() {
     }
   };
 
+  // Utils
+  // const { colorMode } = useColorMode();
   useEffect(() => {
-    const api = `https://pokeapi.co/api/v2/pokemon${pokemonId}`;
+    const api = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
 
     axios
       .get(api)
@@ -100,7 +96,6 @@ export default function PokemonDetails() {
       })
       .catch(e => console.log(e));
   }, [pokemonId]);
-
   useEffect(() => {
     const api = pokemonDetails?.species?.url;
 
@@ -116,16 +111,7 @@ export default function PokemonDetails() {
   return (
     <Box>
       <HStack alignItems={'flex-start'} justifyContent={'space-between'} p={4}>
-        <IconButton
-          onClick={() => {
-            navigate('/');
-          }}
-          icon={<Icon as={ArrowBackIcon} />}
-          borderRadius={'full'}
-          variant={'ghost'}
-        />
-
-        <Box w={'100%'} mr={10}>
+        <Box w={'100%'}>
           <Text fontWeight={700} fontSize={24} w={'100%'} textAlign={'center'}>
             {pokemonDetails?.name[0]?.toUpperCase() +
               pokemonDetails?.name?.slice(1) || 'Loading...'}
@@ -156,23 +142,6 @@ export default function PokemonDetails() {
           />
         </Box>
       </HStack>
-
-      {/* <HStack px={4} w={'100%'} justifyContent={'center'} mb={4}>
-        <IconButton
-          h={'100%'}
-          // colorScheme="p"
-          variant={'outline'}
-          borderRadius={20}
-          icon={<Icon as={ArrowLeftIcon} />}
-        />
-        <IconButton
-          h={'100%'}
-          // colorScheme="p"
-          variant={'outline'}
-          borderRadius={20}
-          icon={<Icon as={ArrowRightIcon} />}
-        />
-      </HStack> */}
 
       <Tabs colorScheme="p">
         <TabList
@@ -241,13 +210,13 @@ export default function PokemonDetails() {
               <Text>{pokemonDetails?.weight / 10 + ' kg' || 'Undefined'}</Text>
             </HStack>
 
-            <HStack className="detailItem">
+            {/* <HStack className="detailItem">
               <Text w={'120px'}>Base Happiness</Text>
               <HStack gap={1}>
                 <Text>{species?.base_happiness || 'Undefined'}</Text>
                 <Icon w={4} as={FavoriteIcon} />
               </HStack>
-            </HStack>
+            </HStack> */}
           </TabPanel>
 
           <TabPanel px={6}>

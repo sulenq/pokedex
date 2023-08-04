@@ -1,13 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { VStack, Image, Text, Link, Spinner } from '@chakra-ui/react';
+import {
+  VStack,
+  Image,
+  Text,
+  Spinner,
+  Modal,
+  ModalContent,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  ModalOverlay,
+  Button,
+  Icon,
+} from '@chakra-ui/react';
+
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+import PokemonDetails from '../pages/PokemonDetails';
 
 export default function Item(props) {
   const data = props?.data;
   const rawName = data?.name;
   const name = rawName[0]?.toUpperCase() + rawName?.slice(1);
   const [detailsData, setDetailsData] = useState(null);
+  console.log(window.innerWidth);
 
+  // Utils
+  const modalContent = useRef();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     const api = data.url;
     setDetailsData();
@@ -22,12 +43,16 @@ export default function Item(props) {
   }, [data.url]);
 
   return (
-    <Link
-      href={`${detailsData?.id}`}
-      borderRadius={12}
-      border={'1px solid var(--divider)'}
-    >
-      <VStack gap={0} justifyContent={'space-between'} p={4}>
+    <>
+      <VStack
+        onClick={onOpen}
+        cursor={'pointer'}
+        gap={0}
+        justifyContent={'space-between'}
+        p={4}
+        borderRadius={12}
+        border={'1px solid var(--divider)'}
+      >
         {detailsData ? (
           <Image
             src={
@@ -45,6 +70,37 @@ export default function Item(props) {
         </Text>
         <Text fontSize={14}>{detailsData?.id.toString().padStart(4, '0')}</Text>
       </VStack>
-    </Link>
+
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        scrollBehavior="inside"
+        initialFocusRef={modalContent}
+        size={window.innerWidth < 560 ? 'full' : 'xl'}
+        isCentered
+      >
+        <ModalOverlay backdropFilter={'blur(10px)'} />
+
+        <ModalContent ref={modalContent}>
+          <ModalBody>
+            <PokemonDetails id={detailsData?.id} />
+          </ModalBody>
+
+          <ModalFooter p={0}>
+            <Button
+              leftIcon={<Icon as={ArrowBackIcon} fontSize={18} />}
+              w={'100%'}
+              h={'50px'}
+              variant={'ghost'}
+              borderRadius={0}
+              fontSize={'14px'}
+              onClick={onClose}
+            >
+              BACK
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
