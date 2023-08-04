@@ -134,6 +134,8 @@ export default function PokemonDetails(props) {
         >
           <Image
             loading="lazy"
+            boxSize={'400px'}
+            objectFit={'contain'}
             src={
               pokemonDetails?.sprites?.other?.['official-artwork']
                 ?.front_default

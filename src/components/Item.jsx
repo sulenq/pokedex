@@ -52,9 +52,12 @@ export default function Item(props) {
         p={4}
         borderRadius={12}
         border={'1px solid var(--divider)'}
+        _hover={{ bg: 'var(--divider2)' }}
       >
         {detailsData ? (
           <Image
+            objectFit={'contain'}
+            boxSize={'140px'}
             src={
               detailsData?.sprites?.other?.['official-artwork']?.front_default
             }
@@ -81,8 +84,8 @@ export default function Item(props) {
       >
         <ModalOverlay backdropFilter={'blur(10px)'} />
 
-        <ModalContent ref={modalContent}>
-          <ModalBody>
+        <ModalContent ref={modalContent} overflow={'hidden'}>
+          <ModalBody p={0}>
             <PokemonDetails id={detailsData?.id} />
           </ModalBody>
 
